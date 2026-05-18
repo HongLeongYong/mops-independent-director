@@ -63,7 +63,7 @@ venv\Scripts\activate         # Windows
 ### 3. 安裝套件
 
 ```bash
-pip install selenium webdriver-manager beautifulsoup4 pandas openpyxl
+pip install -r requirements.txt
 ```
 
 `webdriver-manager` 會自動下載對應版本的 ChromeDriver，無需手動安裝。
