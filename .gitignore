@@ -20,6 +20,7 @@ result/
 .vscode/
 .idea/
 
-# 需求文件附圖（可視需要移除這兩行）
+# 需求文件
+request.md
 image.png
 image-1.png
