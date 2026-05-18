@@ -13,6 +13,9 @@ env/
 # 爬蟲輸出（不追蹤 Excel 結果）
 result/
 
+# 套件依賴（各自安裝）
+requirements.txt
+
 # macOS
 .DS_Store
 

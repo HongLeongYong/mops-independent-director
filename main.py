@@ -20,7 +20,7 @@ def main():
     prev_file = find_previous_in_latest()
 
     all_data = {}
-    driver = create_driver(headless=False)
+    driver = create_driver(headless=True)
     try:
         for market in MARKET_TYPES:
             text = market["text"]

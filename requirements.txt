@@ -1,5 +1,0 @@
-selenium>=4.0
-webdriver-manager>=4.0
-beautifulsoup4>=4.12
-pandas>=2.0
-openpyxl>=3.1

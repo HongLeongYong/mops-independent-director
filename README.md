@@ -10,6 +10,7 @@
 - 合併輸出為單一 Excel 檔案，帶時間戳命名
 - 自動與上一次結果比對，產出異動報告（新增 / 刪除 / 變更）
 - 雙資料夾管理：「最新檔案」只保留本次結果，「歷史記錄檔案」保留所有歷次結果
+- 爬蟲背景執行，不跳出瀏覽器視窗
 
 ---
 
@@ -19,7 +20,6 @@
 .
 ├── main.py                   # 程式入口
 ├── config.py                 # 設定檔
-├── requirements.txt
 ├── scraper/
 │   ├── browser.py            # Selenium 瀏覽器初始化
 │   └── mops_scraper.py       # 頁面操作與資料擷取
@@ -43,19 +43,34 @@
 
 ---
 
-## 安裝
+## 如何使用
+
+### 1. 複製專案
 
 ```bash
-pip install -r requirements.txt
+git clone https://github.com/HongLeongYong/mops-independent-director.git
+cd mops-independent-director
+```
+
+### 2. 建立虛擬環境（建議）
+
+```bash
+python -m venv venv
+source venv/bin/activate      # macOS / Linux
+venv\Scripts\activate         # Windows
+```
+
+### 3. 安裝套件
+
+```bash
+pip install selenium webdriver-manager beautifulsoup4 pandas openpyxl
 ```
 
 `webdriver-manager` 會自動下載對應版本的 ChromeDriver，無需手動安裝。
 
----
+### 4. 調整設定（選用）
 
-## 設定
-
-編輯 `config.py`：
+編輯 `config.py`，如需更改輸出根目錄或子資料夾名稱：
 
 ```python
 BASE_OUTPUT_DIR = "result"     # 根資料夾路徑（可改為絕對路徑）
@@ -63,17 +78,19 @@ LATEST_SUBDIR   = "最新檔案"
 HISTORY_SUBDIR  = "歷史記錄檔案"
 ```
 
-如需更改輸出根目錄，修改 `BASE_OUTPUT_DIR` 即可，子資料夾會自動建立。
+子資料夾首次執行時會自動建立，無需手動新增。
 
----
-
-## 執行
+### 5. 執行
 
 ```bash
 python main.py
 ```
 
-執行流程：
+爬蟲在背景靜默執行，不會跳出瀏覽器視窗。執行完成後，結果會存放於 `result/最新檔案/`。
+
+---
+
+## 執行流程
 
 1. 自動建立 `最新檔案/` 和 `歷史記錄檔案/` 資料夾（若不存在）
 2. 讀取 `最新檔案/` 裡的上一次爬蟲結果（作為比對基準）
@@ -122,6 +139,5 @@ python main.py
 
 ## 注意事項
 
-- 程式使用 Selenium 控制瀏覽器，執行時會開啟 Chrome 視窗
 - 公開資訊觀測站為動態頁面（SPA），啟動時會等待頁面渲染，執行時間視網路狀況而定
 - `歷史記錄檔案/` 不會自動清理，如需節省空間請手動管理
