@@ -45,7 +45,13 @@
 
 ## 如何使用
 
-### 1. 複製專案
+### 1. 取得專案
+
+**方法一：下載 ZIP（不需安裝 Git）**
+
+至 [GitHub 頁面](https://github.com/HongLeongYong/mops-independent-director) 點擊 **Code → Download ZIP**，解壓縮後進入資料夾。
+
+**方法二：Git Clone**
 
 ```bash
 git clone https://github.com/HongLeongYong/mops-independent-director.git
@@ -73,7 +79,8 @@ pip install -r requirements.txt
 編輯 `config.py`，如需更改輸出根目錄或子資料夾名稱：
 
 ```python
-BASE_OUTPUT_DIR = "result"     # 根資料夾路徑（可改為絕對路徑）
+BASE_OUTPUT_DIR = "result"    # 預設輸出到專案內的 result/，可改為絕對路徑
+                               # 例如："/Users/yourname/Documents/output"
 LATEST_SUBDIR   = "最新檔案"
 HISTORY_SUBDIR  = "歷史記錄檔案"
 ```
