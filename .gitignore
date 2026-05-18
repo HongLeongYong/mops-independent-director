@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# 虛擬環境
+venv/
+.venv/
+env/
+
+# 爬蟲輸出（不追蹤 Excel 結果）
+result/
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# 需求文件附圖（可視需要移除這兩行）
+image.png
+image-1.png
