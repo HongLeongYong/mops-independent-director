@@ -8,7 +8,7 @@ MARKET_TYPES = [
     {"text": "公開發行", "sheet": "公開銀行"},
 ]
 
-BASE_OUTPUT_DIR = "result"    # 根資料夾，可改為絕對路徑，例如 "/Users/yourname/Documents/output"
+BASE_OUTPUT_DIR = "/Users/username/Desktop/clawer_output"    # 根資料夾，可自訂路徑
 LATEST_SUBDIR   = "最新檔案"
 HISTORY_SUBDIR  = "歷史記錄檔案"
 OUTPUT_BASENAME = "獨立董事彙總表"
