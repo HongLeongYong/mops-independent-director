@@ -1,5 +1,11 @@
 ENTRY_URL = "https://mops.twse.com.tw/mops/#/web/t93sc01_1"
 
+# 瀏覽器設定
+HEADLESS = True                # True：背景執行不跳出視窗；False：顯示瀏覽器視窗
+CHROMEDRIVER_PATH = ""         # 留空則自動下載；填路徑則使用本機 chromedriver
+# CHROMEDRIVER_PATH = "./chromedriver.exe"   # Windows 範例
+# CHROMEDRIVER_PATH = "./chromedriver"       # macOS / Linux 範例
+
 # Proxy 設定
 USE_PROXY = False
 PROXIES = [

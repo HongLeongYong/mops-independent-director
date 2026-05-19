@@ -28,7 +28,7 @@ def main():
     prev_file = find_previous_in_latest()
 
     all_data = {}
-    driver = create_driver(headless=True, proxy=proxy)
+    driver = create_driver(proxy=proxy)
     try:
         for market in MARKET_TYPES:
             text = market["text"]
