@@ -1,5 +1,14 @@
 ENTRY_URL = "https://mops.twse.com.tw/mops/#/web/t93sc01_1"
 
+# Proxy 設定
+USE_PROXY = True
+PROXIES = [
+    {"http": "http://10.63.122.61:8080", "https": "http://10.63.122.61:8080"},
+    # 在此填入其餘 proxy，格式相同
+    # {"http": "http://10.x.x.x:8080", "https": "http://10.x.x.x:8080"},
+]
+PROXY_TEST_TIMEOUT = 10  # 每個 proxy 測試的 timeout（秒）
+
 # text: 下拉選單實際顯示文字；sheet: Excel sheet 名稱
 MARKET_TYPES = [
     {"text": "上市",   "sheet": "上市"},

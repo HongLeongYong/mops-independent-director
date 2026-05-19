@@ -1,10 +1,11 @@
 import os
 from scraper.browser import create_driver
 from scraper.mops_scraper import fetch_market_page
+from scraper.proxy_finder import find_working_proxy
 from parser.table_parser import parse_table
 from exporter.excel_exporter import export_to_excel
 from comparer.compare import find_previous_in_latest, run_compare
-from config import MARKET_TYPES, BASE_OUTPUT_DIR, LATEST_SUBDIR, HISTORY_SUBDIR
+from config import MARKET_TYPES, BASE_OUTPUT_DIR, LATEST_SUBDIR, HISTORY_SUBDIR, USE_PROXY
 
 
 def ensure_dirs():
@@ -16,11 +17,18 @@ def ensure_dirs():
 def main():
     ensure_dirs()
 
+    proxy = None
+    if USE_PROXY:
+        proxy = find_working_proxy()
+        if proxy is None:
+            print("[錯誤] 找不到可用的 proxy，程式終止")
+            return
+
     # 爬蟲前先找舊版，避免寫入新檔後出現多份
     prev_file = find_previous_in_latest()
 
     all_data = {}
-    driver = create_driver(headless=True)
+    driver = create_driver(headless=True, proxy=proxy)
     try:
         for market in MARKET_TYPES:
             text = market["text"]
