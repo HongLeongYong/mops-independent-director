@@ -1,3 +1,6 @@
+# 個人設定（請複製 config.example.py 並改名為 config.py）
+config.py
+
 # Python
 __pycache__/
 *.py[cod]

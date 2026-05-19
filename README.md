@@ -74,17 +74,31 @@ pip install -r requirements.txt
 
 `webdriver-manager` 會自動下載對應版本的 ChromeDriver，無需手動安裝。
 
-### 4. 調整設定（選用）
+### 4. 建立設定檔
 
-編輯 `config.py`，如需更改輸出根目錄或子資料夾名稱：
+複製範例設定檔，再依自己的環境修改：
 
-```python
-BASE_OUTPUT_DIR = "/Users/username/Desktop/clawer_output"    # 根資料夾，可自訂路徑
-LATEST_SUBDIR   = "最新檔案"
-HISTORY_SUBDIR  = "歷史記錄檔案"
+```bash
+cp config.example.py config.py
 ```
 
-子資料夾首次執行時會自動建立，無需手動新增。
+開啟 `config.py`，至少修改以下這行：
+
+```python
+BASE_OUTPUT_DIR = "/Users/username/Desktop/clawer_output"    # 改為自己的輸出路徑
+```
+
+如在公司需要走 proxy，則一併設定：
+
+```python
+USE_PROXY = True
+PROXIES = [
+    {"http": "http://10.x.x.x:8080", "https": "http://10.x.x.x:8080"},
+    # 可填入多組，程式會自動找第一個可用的
+]
+```
+
+> `config.py` 已加入 `.gitignore`，不會被推上 GitHub，之後隨便改都沒關係。
 
 ### 5. 執行
 
