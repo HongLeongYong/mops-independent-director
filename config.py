@@ -1,7 +1,7 @@
 ENTRY_URL = "https://mops.twse.com.tw/mops/#/web/t93sc01_1"
 
 # Proxy 設定
-USE_PROXY = True
+USE_PROXY = False
 PROXIES = [
     {"http": "http://10.63.122.61:8080", "https": "http://10.63.122.61:8080"},
     # 在此填入其餘 proxy，格式相同
