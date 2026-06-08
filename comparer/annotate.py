@@ -2,7 +2,7 @@ import os
 import shutil
 from datetime import datetime
 import pandas as pd
-from config import BASE_OUTPUT_DIR, LATEST_SUBDIR, HISTORY_SUBDIR, RELATION_FILE
+from config import BASE_OUTPUT_DIR, LATEST_SUBDIR, HISTORY_SUBDIR, RELATION_FILE, COMPANY_NAME
 
 # 關係種類 CSV 欄位位置（0-based）
 _COL_B = 1   # 關係類別（第一群）
@@ -25,7 +25,7 @@ _TYPE_B_B = {
     "本公司大股東(利害關係人)",
 }
 
-_SUSPICIOUS = "疑似為xx利害關係人，需再進行確認"
+_SUSPICIOUS = f"疑似為{COMPANY_NAME}利害關係人，需再進行確認"
 
 
 def run_annotate(compare_file: str) -> None:
@@ -40,7 +40,7 @@ def run_annotate(compare_file: str) -> None:
     print(f"[標註] 關係種類：{RELATION_FILE}")
 
     df_cmp = pd.read_excel(compare_file, dtype=str).fillna("")
-    df_rel = pd.read_csv(RELATION_FILE, dtype=str, header=0).fillna("")
+    df_rel = pd.read_csv(RELATION_FILE, dtype=str, header=0, encoding="utf-16", sep="\t").fillna("")
 
     rows = []
     for _, cmp_row in df_cmp.iterrows():
@@ -49,7 +49,7 @@ def run_annotate(compare_file: str) -> None:
 
         if matches.empty:
             new_row = cmp_row.to_dict()
-            new_row["姓名比對結果"] = "非xx利害關係人"
+            new_row["姓名比對結果"] = f"非{COMPANY_NAME}利害關係人"
             new_row["系統關係類別一"] = ""
             new_row["系統關係類別二"] = ""
             new_row["比對結果"] = ""
@@ -60,7 +60,7 @@ def run_annotate(compare_file: str) -> None:
                 t_val = rel_row.iloc[_COL_T]
                 b_val = rel_row.iloc[_COL_B]
                 new_row = cmp_row.to_dict()
-                new_row["姓名比對結果"] = "與xx利害關係人同名同姓"
+                new_row["姓名比對結果"] = f"與{COMPANY_NAME}利害關係人同名同姓"
 
                 if t_val in _TYPE_A:
                     new_row["系統關係類別一"] = t_val
@@ -78,7 +78,7 @@ def run_annotate(compare_file: str) -> None:
                 new_row["備註"] = ""
                 rows.append(new_row)
 
-    df_result = pd.DataFrame(rows).fillna("")
+    df_result = pd.DataFrame(rows).fillna("").drop_duplicates()
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     filename    = f"annotated_compare_result_{timestamp}.xlsx"
