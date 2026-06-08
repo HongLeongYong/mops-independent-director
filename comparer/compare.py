@@ -24,10 +24,10 @@ def find_previous_in_latest() -> str | None:
     return candidates[-1]
 
 
-def run_compare(new_file: str, prev_file: str | None) -> None:
+def run_compare(new_file: str, prev_file: str | None) -> str | None:
     if prev_file is None:
         print("[比對] 找不到上一版 Excel，跳過比對")
-        return
+        return None
 
     print(f"[比對] 新版：{os.path.basename(new_file)}")
     print(f"[比對] 舊版：{os.path.basename(prev_file)}")
@@ -70,6 +70,7 @@ def run_compare(new_file: str, prev_file: str | None) -> None:
         print(f"[比對] 已備份：{compare_history_path}")
 
     _cleanup_latest(latest_dir, keep_crawl=new_file, keep_compare=compare_latest_path)
+    return compare_latest_path
 
 
 def _cleanup_latest(latest_dir: str, keep_crawl: str, keep_compare: str | None) -> None:

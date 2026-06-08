@@ -6,15 +6,6 @@ CHROMEDRIVER_PATH = ""         # 留空則自動下載；填路徑則使用本�
 # CHROMEDRIVER_PATH = "./chromedriver.exe"   # Windows 範例
 # CHROMEDRIVER_PATH = "./chromedriver"       # macOS / Linux 範例
 
-# Proxy 設定
-USE_PROXY = False
-PROXIES = [
-    {"http": "http://10.x.x.x:8080", "https": "http://10.x.x.x:8080"},
-    # 可繼續新增多組 proxy，程式會逐一測試，找到第一個可用的即使用
-    # {"http": "http://10.x.x.x:8080", "https": "http://10.x.x.x:8080"},
-]
-PROXY_TEST_TIMEOUT = 10  # 每個 proxy 測試的 timeout（秒）
-
 # text: 下拉選單實際顯示文字；sheet: Excel sheet 名稱
 MARKET_TYPES = [
     {"text": "上市",   "sheet": "上市"},
@@ -27,6 +18,7 @@ BASE_OUTPUT_DIR = "/Users/username/Desktop/clawer_output"    # 修改為自己�
 LATEST_SUBDIR   = "最新檔案"
 HISTORY_SUBDIR  = "歷史記錄檔案"
 OUTPUT_BASENAME = "獨立董事彙總表"
+RELATION_FILE   = ""   # 關係種類 CSV 檔案的完整路徑，例如 "/Users/username/Desktop/關係種類.csv"
 
 SPA_LOAD_WAIT = 3   # 秒，等 SPA 初始化
 WAIT_TIMEOUT = 30
