@@ -1,11 +1,28 @@
 import time
+from selenium.common.exceptions import WebDriverException, TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.support import expected_conditions as EC
-from config import ENTRY_URL, SPA_LOAD_WAIT, WAIT_TIMEOUT
+from config import ENTRY_URL, SPA_LOAD_WAIT, WAIT_TIMEOUT, MAX_RETRIES, RETRY_WAIT
 
 
 def fetch_market_page(driver, market_text: str) -> str:
+    """抓取單一市場別頁面，遇到網路/逾時錯誤自動重試。"""
+    last_error = None
+    for attempt in range(1, MAX_RETRIES + 1):
+        try:
+            return _fetch_market_page_once(driver, market_text)
+        except (WebDriverException, TimeoutException) as e:
+            last_error = e
+            if attempt < MAX_RETRIES:
+                wait_sec = RETRY_WAIT * attempt
+                print(f"[重試] {market_text} 第 {attempt} 次失敗，{wait_sec} 秒後重試：{e}")
+                time.sleep(wait_sec)
+    # 重試耗盡，往外拋讓 main.py 記錄該市場別失敗
+    raise last_error
+
+
+def _fetch_market_page_once(driver, market_text: str) -> str:
     # 開新 tab，確保每次都是乾淨狀態
     driver.execute_script("window.open('');")
     new_tab = driver.window_handles[-1]

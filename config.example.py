@@ -23,3 +23,7 @@ COMPANY_NAME    = "xx"             # 公司名稱，用於標註結果文字（�
 
 SPA_LOAD_WAIT = 3   # 秒，等 SPA 初始化
 WAIT_TIMEOUT = 30
+
+# 網路失敗重試設定
+MAX_RETRIES = 3     # 每個市場別最多嘗試次數（含第一次）
+RETRY_WAIT = 5      # 秒，重試前等待時間（每次遞增：5, 10, 15...）

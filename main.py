@@ -33,8 +33,9 @@ def main():
                 all_data[sheet] = records
                 print(f"[完成] {text}：取得 {len(records)} 筆")
             except Exception as e:
-                print(f"[錯誤] {text} 失敗：{e}")
-                all_data[sheet] = []
+                # 重試耗盡仍失敗：中止整個流程，不產出不完整的檔案
+                print(f"[中止] {text} 多次重試後仍失敗，停止本次爬取，不覆蓋舊檔：{e}")
+                return
     finally:
         driver.quit()
 
