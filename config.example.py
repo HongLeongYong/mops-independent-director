@@ -11,7 +11,7 @@ MARKET_TYPES = [
     {"text": "上市",   "sheet": "上市"},
     {"text": "上櫃",   "sheet": "上櫃"},
     {"text": "興櫃",   "sheet": "興櫃"},
-    {"text": "公開發行", "sheet": "公開銀行"},
+    {"text": "公開發行", "sheet": "公開發行"},
 ]
 
 BASE_OUTPUT_DIR = "/Users/username/Desktop/clawer_output"    # 修改為自己的輸出路徑
